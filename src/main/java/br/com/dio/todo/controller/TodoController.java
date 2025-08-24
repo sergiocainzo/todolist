@@ -43,10 +43,9 @@ public class TodoController {
         return ResponseEntity.ok(findOne);
     }
 
-    @PutMapping
+    @PutMapping("/{id}")
     public ResponseEntity<Todo> updated(@PathVariable Long id,@RequestBody Todo todo){
         var todoEdit = service.updated(id,todo);
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(todoEdit.getId()).toUri();
         return ResponseEntity.ok().body(todoEdit);
     }
 
