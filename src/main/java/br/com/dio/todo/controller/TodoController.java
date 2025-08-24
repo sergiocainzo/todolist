@@ -1,6 +1,7 @@
 package br.com.dio.todo.controller;
 
 import br.com.dio.todo.domain.model.Todo;
+import br.com.dio.todo.dto.TodoDto;
 import br.com.dio.todo.service.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -43,9 +44,9 @@ public class TodoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Todo> updated(@PathVariable Long id, @RequestBody Todo todo){
-        var todoEdit = service.update(id,todo);
-        return ResponseEntity.ok().body(todoEdit);
+    public ResponseEntity<Todo> updated(@PathVariable Long id, @RequestBody TodoDto dto){
+        Todo atualizado = service.update(id,dto);
+        return ResponseEntity.ok().body(atualizado);
     }
 
 

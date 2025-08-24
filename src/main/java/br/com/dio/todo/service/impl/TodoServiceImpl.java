@@ -2,6 +2,7 @@ package br.com.dio.todo.service.impl;
 
 import br.com.dio.todo.domain.model.Todo;
 import br.com.dio.todo.domain.repository.TodoRepository;
+import br.com.dio.todo.dto.TodoDto;
 import br.com.dio.todo.exceptions.GlobalExceptionHandler;
 import br.com.dio.todo.exceptions.TodoNotFoundException;
 import br.com.dio.todo.service.TodoService;
@@ -33,16 +34,16 @@ public class TodoServiceImpl implements TodoService {
     }
 
     @Override
-    public Todo update(Long id, Todo todo) {
-        return repository.findById(id)
-                .map(existing -> {
-                   existing.setNome(todo.getNome());
-                   existing.setDescricao(todo.getDescricao());
-                   existing.setPrioridade(todo.getPrioridade());
-                   existing.setEstado(todo.getEstado());
-                   return repository.save(existing);
-        })
+    public Todo update(Long id, TodoDto dto) {
+        Todo existente = repository.findById(id)
                 .orElseThrow(() -> new TodoNotFoundException(id));
+        if (dto.getNome() != null) existente.setNome(dto.getNome());
+        if (dto.getDescricao() != null) existente.setDescricao(dto.getDescricao());
+        if (dto.getPrioridade() != null) existente.setPrioridade(dto.getPrioridade());
+        if (dto.getEstado() != null) existente.setEstado(dto.getEstado());
+
+        return repository.save(existente);
+
     }
 
     @Override
