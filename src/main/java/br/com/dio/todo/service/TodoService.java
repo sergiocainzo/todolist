@@ -10,4 +10,6 @@ public interface TodoService {
     public List<Todo> getAll();
     public Todo creted(Todo todo);
     public Optional<Todo> getOneById(long id);
+    public Todo updated(Long id, Todo todo);
+    public void removed(Long id);
 }

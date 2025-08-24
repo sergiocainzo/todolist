@@ -43,5 +43,18 @@ public class TodoController {
         return ResponseEntity.ok(findOne);
     }
 
+    @PutMapping
+    public ResponseEntity<Todo> updated(@PathVariable Long id,@RequestBody Todo todo){
+        var todoEdit = service.updated(id,todo);
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(todoEdit.getId()).toUri();
+        return ResponseEntity.ok().body(todoEdit);
+    }
+
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> removed(Long id){
+        service.removed(id);
+        return ResponseEntity.ok().body("Tarefa removida com sucesso!");
+    }
 
 }

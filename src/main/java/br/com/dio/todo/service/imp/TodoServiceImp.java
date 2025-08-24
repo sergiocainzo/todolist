@@ -30,4 +30,24 @@ public class TodoServiceImp implements TodoService {
         return repository.findById(id);
     }
 
+    @Override
+    public Todo updated(Long id, Todo todo) {
+        if (repository.existsById(id)){
+            var findId = repository.findById(id);
+            return repository.save(todo);
+        } else {
+            return null;
+        }
+
+    }
+
+    @Override
+    public void removed(Long id) {
+        if (!repository.existsById(id)){
+            System.out.printf("ID: %s não localizada%n", id);
+        } else {
+            repository.deleteById(id);
+        }
+    }
+
 }
