@@ -1,10 +1,17 @@
 package br.com.dio.todo.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public enum Estado {
 
-    FINALIZADO,
+    @JsonProperty("finalizada")
+    FINALIZADA,
+    @JsonProperty("em_andamento")
     EM_ANDAMENTO,
+    @JsonProperty("em_analise")
     EM_ANALISE,
-    REGISTRADO
+    @JsonProperty("registrada")
+    REGISTRADA
+
 
 }

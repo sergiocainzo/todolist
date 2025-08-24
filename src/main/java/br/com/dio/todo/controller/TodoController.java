@@ -32,27 +32,26 @@ public class TodoController {
 
     @PostMapping
     public ResponseEntity<Todo> createdTodo(@RequestBody Todo todo){
-        var newTodo = service.creted(todo);
+        var newTodo = service.create(todo);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newTodo.getId()).toUri();
-        return ResponseEntity.ok().body(newTodo);
+        return ResponseEntity.created(location).body(newTodo);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Todo>> getOneById(@PathVariable Long id){
-        var findOne = service.getOneById(id);
-        return ResponseEntity.ok(findOne);
+    public ResponseEntity<Todo> getOneById(@PathVariable Long id){
+        return service.getOneById(id).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Todo> updated(@PathVariable Long id,@RequestBody Todo todo){
-        var todoEdit = service.updated(id,todo);
+    public ResponseEntity<Optional<Todo>> updated(@PathVariable Long id, @RequestBody Todo todo){
+        var todoEdit = service.update(id,todo);
         return ResponseEntity.ok().body(todoEdit);
     }
 
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> removed(Long id){
-        service.removed(id);
+    public ResponseEntity<String> removed(@PathVariable Long id){
+        service.remove(id);
         return ResponseEntity.ok().body("Tarefa removida com sucesso!");
     }
 

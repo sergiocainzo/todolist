@@ -7,9 +7,9 @@ import java.util.Optional;
 
 public interface TodoService {
 
-    public List<Todo> getAll();
-    public Todo creted(Todo todo);
-    public Optional<Todo> getOneById(long id);
-    public Todo updated(Long id, Todo todo);
-    public void removed(Long id);
+     List<Todo> getAll();
+     Todo create(Todo todo);
+     Optional<Todo> getOneById(long id);
+     Optional<Todo> update(Long id, Todo todo);
+     void remove(Long id);
 }
