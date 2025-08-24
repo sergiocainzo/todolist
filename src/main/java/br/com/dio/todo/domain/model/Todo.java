@@ -4,7 +4,7 @@ package br.com.dio.todo.domain.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity(name = "tb_todos")
 @Data
@@ -12,27 +12,36 @@ public class Todo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "tb_id")
+    @Column(name = "id")
     private Long id;
 
-    @Column(name = "tb_nome", nullable = false)
+    @Column(name = "nome", nullable = false)
     private String nome;
 
-    @Column(name = "tb_descricao", nullable = false)
+    @Column(name = "descricao", nullable = false)
     private String descricao;
 
-    @Column(name = "tb_prioridade")
+    @Enumerated(EnumType.STRING)
+    @Column(name = "prioridade")
     private Prioridade prioridade;
 
-    @Column(name = "tb_estado")
+    @Enumerated(EnumType.STRING)
+    @Column(name = "estado")
     private Estado estado;
 
-    @Column(name = "tb_dataCriacao")
-    private Date dataCriacao;
+    @Column(name = "data_criacao")
+    private LocalDateTime dataCriacao;
 
-    public Todo(){
-        this.estado = Estado.REGISTRADO;
-        this.prioridade=Prioridade.MEDIA;
-        this.dataCriacao = new Date();
+
+    @PrePersist
+    protected void onCreate(){
+        if (this.estado == null){
+            this.estado = Estado.REGISTRADA;
+        }
+        if (this.prioridade == null){
+            this.prioridade = Prioridade.MEDIA;
+        }
+        this.dataCriacao=LocalDateTime.now();
     }
+
 }
