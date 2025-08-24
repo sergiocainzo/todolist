@@ -3,7 +3,8 @@
 
 
 # Diagrama de Classe
-```classDiagram
+```mermaid
+classDiagram
     %% Modelos
     class Todo {
         -Long id
@@ -14,8 +15,17 @@
         -LocalDateTime dataCriacao
     }
 
-    class Prioridade
-    class Estado
+    class Prioridade {
+    +ALTA
+    +MEDIA
+    +BAIXA
+   }
+    class Estado {
+    +REGISTRADA
+    +EM_ANALISE
+    +EM_ANDAMENTO
+    +FINALIZADA
+  }
 
     %% Repositório
     class TodoRepository {
