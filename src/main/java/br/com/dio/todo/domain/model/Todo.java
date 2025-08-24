@@ -1,13 +1,17 @@
 package br.com.dio.todo.domain.model;
 
 
+import br.com.dio.todo.dto.TodoDto;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Entity(name = "tb_todos")
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Todo {
 
     @Id
@@ -32,6 +36,13 @@ public class Todo {
     @Column(name = "data_criacao")
     private LocalDateTime dataCriacao;
 
+
+    public Todo(TodoDto dto){
+        this.nome = dto.getNome();
+        this.descricao = dto.getDescricao();
+        this.prioridade = dto.getPrioridade();
+        this.estado = dto.getEstado();
+    }
 
     @PrePersist
     protected void onCreate(){

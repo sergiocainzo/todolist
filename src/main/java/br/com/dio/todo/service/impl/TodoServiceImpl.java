@@ -3,14 +3,13 @@ package br.com.dio.todo.service.impl;
 import br.com.dio.todo.domain.model.Todo;
 import br.com.dio.todo.domain.repository.TodoRepository;
 import br.com.dio.todo.dto.TodoDto;
-import br.com.dio.todo.exceptions.GlobalExceptionHandler;
+import br.com.dio.todo.dto.TodoResponseDto;
 import br.com.dio.todo.exceptions.TodoNotFoundException;
 import br.com.dio.todo.service.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class TodoServiceImpl implements TodoService {
@@ -19,29 +18,29 @@ public class TodoServiceImpl implements TodoService {
     private TodoRepository repository;
 
     @Override
-    public List<Todo> getAll() {
-        return repository.findAll();
+    public List<TodoResponseDto> getAllTodos() {
+        return repository.findAll().stream().map(TodoResponseDto::new).toList();
     }
 
     @Override
-    public Todo create(Todo todo) {
-        return repository.save(todo);
+    public TodoResponseDto getOneById(long id) {
+        Todo todo = repository.findById(id).orElseThrow(() -> new TodoNotFoundException(id));
+        return new TodoResponseDto(todo);
     }
 
     @Override
-    public Optional<Todo> getOneById(long id) {
-        return repository.findById(id);
+    public Todo create(TodoDto dto) {
+        Todo novo = new Todo(dto);
+        return repository.save(novo);
     }
+
+
 
     @Override
     public Todo update(Long id, TodoDto dto) {
         Todo existente = repository.findById(id)
                 .orElseThrow(() -> new TodoNotFoundException(id));
-        if (dto.getNome() != null) existente.setNome(dto.getNome());
-        if (dto.getDescricao() != null) existente.setDescricao(dto.getDescricao());
-        if (dto.getPrioridade() != null) existente.setPrioridade(dto.getPrioridade());
-        if (dto.getEstado() != null) existente.setEstado(dto.getEstado());
-
+        merge(existente, dto);
         return repository.save(existente);
 
     }
@@ -54,4 +53,12 @@ public class TodoServiceImpl implements TodoService {
         repository.deleteById(id);
     }
 
+
+    // Merge Todo para TodoDto
+    private void merge(Todo existente, TodoDto dto){
+        if (dto.getNome() != null) existente.setNome(dto.getNome());
+        if (dto.getDescricao() != null) existente.setDescricao(dto.getDescricao());
+        if (dto.getPrioridade() != null) existente.setPrioridade(dto.getPrioridade());
+        if (dto.getEstado() != null) existente.setEstado(dto.getEstado());
+    }
 }
