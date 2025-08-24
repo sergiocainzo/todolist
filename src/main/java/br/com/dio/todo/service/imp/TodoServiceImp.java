@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TodoServiceImp implements TodoService {
@@ -22,6 +23,11 @@ public class TodoServiceImp implements TodoService {
     @Override
     public Todo creted(Todo todo) {
         return repository.save(todo);
+    }
+
+    @Override
+    public Optional<Todo> getOneById(long id) {
+        return repository.findById(id);
     }
 
 }
