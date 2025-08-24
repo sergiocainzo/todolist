@@ -94,13 +94,15 @@ classDiagram
 * Railway – plataforma de deploy na nuvem
 
 ## Endpoints Principais
-Método	Endpoint	Descrição
-GET	/	Mensagem de boas-vindas
-GET	/todos	Lista todas as tarefas
-POST	/todos	Cria uma nova tarefa
-GET	/todos/{id}	Busca uma tarefa por ID
-PUT	/todos/{id}	Atualiza uma tarefa existente
-DELETE	/todos/{id}	Remove uma tarefa
+| Método  | Endpoint        | Descrição                     |
+|---------|-----------------|-------------------------------|
+| GET     | `/`             | Mensagem de boas-vindas       |
+| GET     | `/todos`        | Lista todas as tarefas        |
+| POST    | `/todos`        | Cria uma nova tarefa          |
+| GET     | `/todos/{id}`   | Busca uma tarefa por ID       |
+| PUT     | `/todos/{id}`   | Atualiza uma tarefa existente |
+| DELETE  | `/todos/{id}`   | Remove uma tarefa             |
+
 
 ## Tratamento de Erros
 
