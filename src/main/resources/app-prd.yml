@@ -1,0 +1,18 @@
+# Configuração do Acesso ao Banco de Dados do PpostgreSQL
+
+spring:
+  datasource:
+    url: jdbc:postgresql://gondola.proxy.rlwy.net:45165/railway
+    username: ${PGUSER}
+    password: ${PGPASSWORD}
+    driver-class-name: org.postgresql.Driver
+
+
+#  server:
+#    port: ${PORT:8080}
+
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: create # Validate | update | create | create-drop
+      dialect: org.hibernate.dialect.PostgreSQLDialect

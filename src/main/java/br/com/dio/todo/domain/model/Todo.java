@@ -6,7 +6,7 @@ import lombok.Data;
 
 import java.util.Date;
 
-@Entity
+@Entity(name = "tb_todos")
 @Data
 public class Todo {
 
