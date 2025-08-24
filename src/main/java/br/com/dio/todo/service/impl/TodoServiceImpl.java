@@ -1,4 +1,4 @@
-package br.com.dio.todo.service.imp;
+package br.com.dio.todo.service.impl;
 
 import br.com.dio.todo.domain.model.Todo;
 import br.com.dio.todo.domain.repository.TodoRepository;
@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class TodoServiceImp implements TodoService {
+public class TodoServiceImpl implements TodoService {
 
     @Autowired
     private TodoRepository repository;
@@ -21,7 +21,7 @@ public class TodoServiceImp implements TodoService {
     }
 
     @Override
-    public Todo creted(Todo todo) {
+    public Todo create(Todo todo) {
         return repository.save(todo);
     }
 
@@ -31,23 +31,22 @@ public class TodoServiceImp implements TodoService {
     }
 
     @Override
-    public Todo updated(Long id, Todo todo) {
-        if (repository.existsById(id)){
-            var findId = repository.findById(id);
-            return repository.save(todo);
-        } else {
-            return null;
-        }
-
+    public Optional<Todo> update(Long id, Todo todo) {
+        return repository.findById(id).map(existing -> {
+           existing.setNome(todo.getNome());
+           existing.setDescricao(todo.getDescricao());
+           existing.setPrioridade(todo.getPrioridade());
+           existing.setEstado(todo.getEstado());
+           return repository.save(existing);
+        });
     }
 
     @Override
-    public void removed(Long id) {
+    public void remove(Long id) {
         if (!repository.existsById(id)){
-            System.out.printf("ID: %s não localizada%n", id);
-        } else {
-            repository.deleteById(id);
+            throw new RuntimeException("Tarefa de ID "+id+" não localizada");
         }
+        repository.deleteById(id);
     }
 
 }
