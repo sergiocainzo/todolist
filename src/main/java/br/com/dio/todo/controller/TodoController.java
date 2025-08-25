@@ -42,7 +42,7 @@ public class TodoController {
     }
 
     @PostMapping
-    public ResponseEntity<TodoResponseDto> createdTodo(@RequestBody TodoDto dto){
+    public ResponseEntity<TodoResponseDto> createdTodo(@RequestBody @Valid TodoDto dto){
         Todo novoTodo = service.create(dto);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(novoTodo.getId()).toUri();
         return ResponseEntity.created(location).body(new TodoResponseDto(novoTodo));

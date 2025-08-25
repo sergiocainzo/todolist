@@ -6,8 +6,8 @@ public enum Estado {
 
     @JsonProperty("finalizada")
     FINALIZADA,
-    @JsonProperty("em_andamento")
-    EM_ANDAMENTO,
+    @JsonProperty("em_atendimento")
+    EM_ATENDIMENTO,
     @JsonProperty("em_analise")
     EM_ANALISE,
     @JsonProperty("registrada")

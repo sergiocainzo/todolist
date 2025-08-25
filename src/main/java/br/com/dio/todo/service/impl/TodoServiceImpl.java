@@ -41,7 +41,6 @@ public class TodoServiceImpl implements TodoService {
                 .orElseThrow(() -> new TodoNotFoundException(id));
         merge(existente, dto);
         return repository.save(existente);
-
     }
 
     @Override
