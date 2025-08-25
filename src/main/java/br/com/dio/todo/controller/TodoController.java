@@ -25,6 +25,11 @@ public class TodoController {
         return "Welcome to my API - Todo List in Cloud";
     }
 
+    @GetMapping("/status")
+    public String status(){
+        return "Running branch: Teste";
+    }
+
 
     @GetMapping
     public List<TodoResponseDto> getAllTodos(){
