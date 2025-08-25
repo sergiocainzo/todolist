@@ -14,9 +14,7 @@ public class TodoDto {
 
 
     private String nome;
-
     private String descricao;
-
     private Prioridade prioridade;
     private Estado estado;
 

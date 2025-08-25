@@ -19,10 +19,10 @@ public class Todo {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "nome",nullable = false)
+    @Column(name = "nome")
     private String nome;
 
-    @Column(name = "descricao", nullable = false)
+    @Column(name = "descricao")
     private String descricao;
 
     @Enumerated(EnumType.STRING)
@@ -44,15 +44,24 @@ public class Todo {
         this.estado = dto.getEstado();
     }
 
-    @PrePersist
-    protected void onCreate(){
-        if (this.estado == null){
-            this.estado = Estado.REGISTRADA;
-        }
-        if (this.prioridade == null){
-            this.prioridade = Prioridade.MEDIA;
-        }
-        this.dataCriacao=LocalDateTime.now();
+    public void setPropriedade(Prioridade propriedade){
+        if (this.prioridade == null) this.prioridade = Prioridade.MEDIA;
     }
+
+    public void setEstado(Estado estado){
+        if (this.estado == null) this.estado = Estado.REGISTRADA;
+    }
+
+
+//    @PrePersist
+//    protected void onCreate(){
+//        if (this.estado == null){
+//            this.estado = Estado.REGISTRADA;
+//        }
+//        if (this.prioridade == null){
+//            this.prioridade = Prioridade.MEDIA;
+//        }
+//        this.dataCriacao=LocalDateTime.now();
+//    }
 
 }
