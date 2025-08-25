@@ -4,14 +4,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public enum Estado {
 
-    @JsonProperty("finalizada")
-    FINALIZADA,
+    @JsonProperty("concluido")
+    CONCLUIDO,
     @JsonProperty("em_atendimento")
     EM_ATENDIMENTO,
     @JsonProperty("em_analise")
     EM_ANALISE,
-    @JsonProperty("registrada")
-    REGISTRADA
+    @JsonProperty("registrado")
+    REGISTRADO
 
 
 }
