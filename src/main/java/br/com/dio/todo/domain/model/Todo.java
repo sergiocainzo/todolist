@@ -44,24 +44,16 @@ public class Todo {
         this.estado = dto.getEstado();
     }
 
-    public void setPropriedade(Prioridade propriedade){
-        if (this.prioridade == null) this.prioridade = Prioridade.MEDIA;
+
+    @PrePersist
+    protected void onCreate(){
+        if (this.estado == null){
+            this.estado = Estado.REGISTRADA;
+        }
+        if (this.prioridade == null){
+            this.prioridade = Prioridade.MEDIA;
+        }
+        this.dataCriacao=LocalDateTime.now();
     }
-
-    public void setEstado(Estado estado){
-        if (this.estado == null) this.estado = Estado.REGISTRADA;
-    }
-
-
-//    @PrePersist
-//    protected void onCreate(){
-//        if (this.estado == null){
-//            this.estado = Estado.REGISTRADA;
-//        }
-//        if (this.prioridade == null){
-//            this.prioridade = Prioridade.MEDIA;
-//        }
-//        this.dataCriacao=LocalDateTime.now();
-//    }
 
 }
