@@ -12,10 +12,9 @@ import lombok.*;
 @AllArgsConstructor
 public class TodoDto {
 
-    @NotBlank
+
     private String nome;
 
-    @NotBlank
     private String descricao;
 
     private Prioridade prioridade;

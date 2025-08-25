@@ -27,9 +27,8 @@ public class TodoController {
 
     @GetMapping("/status")
     public String status(){
-        return "Running branch: Teste";
+        return "Running branch: feat-homo";
     }
-
 
     @GetMapping
     public List<TodoResponseDto> getAllTodos(){
