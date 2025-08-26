@@ -7,7 +7,7 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 
-@Entity(name = "tb_todos")
+@Entity(name = "tb_todos_homo")
 @Getter
 @Setter
 @NoArgsConstructor
