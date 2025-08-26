@@ -13,5 +13,5 @@ spring:
   jpa:
     open-in-view: false
     hibernate:
-      ddl-auto: create # Validate | update | create | create-drop
+      ddl-auto: validate # Validate | update | create | create-drop
       dialect: org.hibernate.dialect.PostgreSQLDialect

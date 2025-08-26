@@ -20,10 +20,10 @@ public class TodoController {
     @Autowired
     private TodoService service;
 
-    @GetMapping("/welcome")
-    public String getWelCome(){
-        return "Welcome to my API - Todo List in Cloud";
-    }
+//    @GetMapping("/welcome")
+//    public String getWelCome(){
+//        return "Welcome to my API - Todo List in Cloud";
+//    }
 
     @GetMapping("/status")
     public String status(){
