@@ -48,7 +48,7 @@ public class Todo {
     @PrePersist
     protected void onCreate(){
         if (this.estado == null){
-            this.estado = Estado.REGISTRADA;
+            this.estado = Estado.REGISTRADO;
         }
         if (this.prioridade == null){
             this.prioridade = Prioridade.MEDIA;
